@@ -3,3 +3,4 @@ fmlk
 /submissions/*
 /controllers/*
 .DS*
+batch-run.sh

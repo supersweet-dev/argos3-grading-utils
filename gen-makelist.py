@@ -64,6 +64,7 @@ os.makedirs("./controllers", exist_ok=True)
 makeline = 'add_subdirectory(assignment2_{controller})\n'
 shutil.copyfile("CMakeLists.txt", "./controllers/CMakeLists.txt")
 makelist = open("./controllers/CMakeLists.txt", "a")
+script = open("batch-run.sh", "a")
 for filename in os.scandir('./submissions'):
     if ".cpp" in filename.path:
         controller=filename.name[:-4]
@@ -79,4 +80,6 @@ for filename in os.scandir('./submissions'):
         (open("./controllers/assignment2_{controller}/CMakeLists.txt".format(controller=controller), "a").write(sublist.format(controller=controller)))
         makelist.write(makeline.format(controller=controller))
         (open("./experiments/assignment2_{controller}.argos".format(controller=controller), "a").write(assignment.format(controller=controller)))
+        script.write("argos3 -c experiments/assignment2_{controller}.argos\n".format(controller=controller))
 makelist.close()
+script.close()
